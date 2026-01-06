@@ -3,7 +3,7 @@
 // Note: ASSETS and t() are assumed to be available globally in the bundle context.
 
 function PageHome() {
-  return `
+    return `
     <div class="page-home">
         
         <!-- HERO: Noise vs Silence -->
@@ -47,14 +47,14 @@ function PageHome() {
         <section class="journey" style="background-color: var(--color-bg-items);">
             
             <!-- 1. HAGURO (Present/Body) -->
-            <article class="mountain-section" style="position: relative; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; overflow: hidden;">
-                <div class="img-col" style="height: 100%; position: relative; overflow: hidden;">
+            <article class="mountain-section grid-responsive" style="min-height: 80vh; align-items: center; overflow: hidden;">
+                <div class="img-col" style="height: 100%; position: relative; overflow: hidden; min-height: 400px;">
                     <img src="${ASSETS.HAGURO_STEPS}" class="parallax-img" style="width: 100%; height: 120%; object-fit: cover; position: absolute; top: -10%;">
                 </div>
                 <div class="text-col" style="padding: var(--spacing-xl); background: #fff;">
                     <span class="serif" style="display: block; color: var(--color-text-muted); margin-bottom: 1rem;">01 Present</span>
-                    <h2 class="serif fade-in" style="font-size: 3rem; margin-bottom: 2rem;">羽黒山</h2>
-                    <p class="fade-in" style="margin-bottom: 2rem;">
+                    <h2 class="serif fade-in" style="font-size: var(--font-size-h2); margin-bottom: 2rem;">羽黒山</h2>
+                    <p class="fade-in" style="margin-bottom: 2rem; font-size: var(--font-size-body);">
                         意識から身体へ。<br>
                         2,446段の石段を登り、自身の身体の重みと呼吸を感じる。<br>
                         現世利益と今を生きる喜び。
@@ -64,14 +64,14 @@ function PageHome() {
             </article>
 
             <!-- 2. GASSAN (Past/Unconscious) -->
-             <article class="mountain-section" style="position: relative; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; overflow: hidden; direction: rtl;">
-                <div class="img-col" style="height: 100%; position: relative; overflow: hidden;">
+             <article class="mountain-section grid-responsive" style="min-height: 80vh; align-items: center; overflow: hidden; direction: rtl;">
+                <div class="img-col" style="height: 100%; position: relative; overflow: hidden; min-height: 400px;">
                     <img src="${ASSETS.GASSAN_MAIN}" class="parallax-img" style="width: 100%; height: 120%; object-fit: cover; position: absolute; top: -10%;">
                 </div>
                 <div class="text-col" style="padding: var(--spacing-xl); background: #f8f8f8; direction: ltr;">
                     <span class="serif" style="display: block; color: var(--color-text-muted); margin-bottom: 1rem;">02 Past</span>
-                    <h2 class="serif fade-in" style="font-size: 3rem; margin-bottom: 2rem;">月山</h2>
-                    <p class="fade-in" style="margin-bottom: 2rem;">
+                    <h2 class="serif fade-in" style="font-size: var(--font-size-h2); margin-bottom: 2rem;">月山</h2>
+                    <p class="fade-in" style="margin-bottom: 2rem; font-size: var(--font-size-body);">
                         無意識の世界へ。<br>
                         霧に包まれた稜線を歩き、思考を手放す。<br>
                         死後の世界と祖霊への祈り。
@@ -81,14 +81,14 @@ function PageHome() {
             </article>
 
             <!-- 3. YUDONO (Future/Rebirth) -->
-             <article class="mountain-section" style="position: relative; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; overflow: hidden;">
-                <div class="img-col" style="height: 100%; position: relative; overflow: hidden;">
+             <article class="mountain-section grid-responsive" style="min-height: 80vh; align-items: center; overflow: hidden;">
+                <div class="img-col" style="height: 100%; position: relative; overflow: hidden; min-height: 400px;">
                     <img src="${ASSETS.YUDONO_MAIN}" class="parallax-img" style="width: 100%; height: 120%; object-fit: cover; position: absolute; top: -10%;">
                 </div>
                 <div class="text-col" style="padding: var(--spacing-xl); background: #1a1a1a; color: #fff;">
                     <span class="serif" style="display: block; color: var(--color-text-muted); margin-bottom: 1rem;">03 Future</span>
-                    <h2 class="serif fade-in" style="font-size: 3rem; margin-bottom: 2rem; color: var(--color-accent);">湯殿山</h2>
-                    <p class="fade-in" style="margin-bottom: 2rem;">
+                    <h2 class="serif fade-in" style="font-size: var(--font-size-h2); margin-bottom: 2rem; color: var(--color-accent);">湯殿山</h2>
+                    <p class="fade-in" style="margin-bottom: 2rem; font-size: var(--font-size-body);">
                         未来へ生まれ直す。<br>
                         語る勿れ、聞く勿れ。<br>
                         裸足で御神体に触れ、生命の源泉に還る。

@@ -112,3 +112,80 @@ a:hover {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* --- Responsive & Mobile Optimizations --- */
+
+/* Fluid Typography */
+:root {
+    --font-size-hero: clamp(2rem, 8vw, 4rem); /* Scales between 2rem and 4rem */
+    --font-size-h2: clamp(1.8rem, 5vw, 3rem);
+    --font-size-body: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* Helper Class for Mobile Grid Stacking */
+.grid-responsive {
+    display: grid;
+    grid-template-columns: 1fr; /* Default to mobile stack */
+    gap: 0;
+}
+
+@media (min-width: 769px) {
+    .grid-responsive {
+        grid-template-columns: 1fr 1fr !important;
+    }
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 768px) {
+    /* Hide Desktop Nav */
+    .header-inner nav {
+        display: none; /* We will toggle a separate mobile menu or style this differently */
+    }
+    
+    .header-inner .mobile-menu-btn {
+        display: block !important;
+    }
+
+    /* Mobile Overlay Menu */
+    .mobile-nav-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.98);
+        z-index: 200;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-100%);
+        transition: transform 0.4s ease;
+    }
+
+    .mobile-nav-overlay.active {
+        transform: translateY(0);
+    }
+
+    .mobile-nav-overlay a {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        margin: 15px 0;
+        color: var(--color-text);
+    }
+
+    .container {
+        padding: 0 20px; /* More padding on mobile */
+    }
+
+    /* Adjust Vertical Text for Mobile */
+    .vertical-text {
+        writing-mode: horizontal-tb !important;
+        height: auto !important;
+        margin-bottom: 2rem !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--color-accent);
+        padding-bottom: 10px;
+        font-size: 1.5rem !important;
+        width: 100%;
+        text-align: center;
+        padding-right: 0 !important;
+    }
+}

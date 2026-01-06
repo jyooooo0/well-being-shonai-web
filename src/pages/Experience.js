@@ -1,5 +1,5 @@
 export function Experience() {
-  return `
+    return `
     <div class="page-experience">
         
         <!-- INTRO -->
@@ -18,7 +18,7 @@ export function Experience() {
 
         <!-- 1. HAGURO -->
         <section class="exp-section" style="padding: 100px 0;">
-            <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+            <div class="container grid-responsive" style="align-items: center; gap: 60px;">
                 <div class="img-wrap fade-in" style="position: relative; height: 500px; overflow: hidden;">
                      <img src="${ASSETS.HAGURO_MAIN}" class="img-live" style="width: 100%; height: 100%; object-fit: cover;">
                      <div style="position: absolute; bottom: 20px; left: 20px; color: #fff; z-index: 2;">
@@ -26,8 +26,8 @@ export function Experience() {
                      </div>
                 </div>
                 <div class="text-wrap fade-in">
-                    <h2 class="serif" style="font-size: 2.5rem; margin-bottom: 20px;">羽黒山 <span style="font-size: 1rem; color: #666;">- Present -</span></h2>
-                    <p style="margin-bottom: 30px; line-height: 1.8;">
+                    <h2 class="serif" style="font-size: var(--font-size-h2); margin-bottom: 20px;">羽黒山 <span style="font-size: 1rem; color: #666;">- Present -</span></h2>
+                    <p style="margin-bottom: 30px; line-height: 1.8; font-size: var(--font-size-body);">
                         <strong>現世の利益を願う山</strong><br><br>
                         樹齢数百年を超える杉並木と、2,446段の石段。<br>
                         一歩踏みしめるごとに、身体の重みと呼吸を感じる。<br>
@@ -44,7 +44,7 @@ export function Experience() {
 
         <!-- 2. GASSAN -->
         <section class="exp-section" style="padding: 100px 0; background: #f4f8f9;">
-            <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; direction: rtl;">
+            <div class="container grid-responsive" style="align-items: center; gap: 60px; direction: rtl;">
                 <div class="img-wrap fade-in" style="position: relative; height: 500px; overflow: hidden;">
                      <img src="${ASSETS.GASSAN_MAIN}" class="img-live" style="width: 100%; height: 100%; object-fit: cover;">
                      <div style="position: absolute; bottom: 20px; right: 20px; color: #fff; z-index: 2;">
@@ -52,8 +52,8 @@ export function Experience() {
                      </div>
                 </div>
                 <div class="text-wrap fade-in" style="direction: ltr;">
-                    <h2 class="serif" style="font-size: 2.5rem; margin-bottom: 20px;">月山 <span style="font-size: 1rem; color: #666;">- Past -</span></h2>
-                    <p style="margin-bottom: 30px; line-height: 1.8;">
+                    <h2 class="serif" style="font-size: var(--font-size-h2); margin-bottom: 20px;">月山 <span style="font-size: 1rem; color: #666;">- Past -</span></h2>
+                    <p style="margin-bottom: 30px; line-height: 1.8; font-size: var(--font-size-body);">
                         <strong>過去、死後の世界</strong><br><br>
                         雲上の別世界。<br>
                         高山植物と岩場、霧に包まれた静寂の稜線を行く。<br>
@@ -70,7 +70,7 @@ export function Experience() {
 
         <!-- 3. YUDONO -->
         <section class="exp-section" style="padding: 100px 0; background: #1a1a1a; color: #fff;">
-            <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+            <div class="container grid-responsive" style="align-items: center; gap: 60px;">
                 <div class="img-wrap fade-in" style="position: relative; height: 500px; overflow: hidden;">
                      <img src="${ASSETS.YUDONO_MAIN}" class="img-live" style="width: 100%; height: 100%; object-fit: cover;">
                      <div style="position: absolute; bottom: 20px; left: 20px; color: #fff; z-index: 2;">
@@ -78,8 +78,8 @@ export function Experience() {
                      </div>
                 </div>
                 <div class="text-wrap fade-in">
-                    <h2 class="serif" style="font-size: 2.5rem; margin-bottom: 20px; color: var(--color-accent);">湯殿山 <span style="font-size: 1rem; color: #999;">- Future -</span></h2>
-                    <p style="margin-bottom: 30px; line-height: 1.8;">
+                    <h2 class="serif" style="font-size: var(--font-size-h2); margin-bottom: 20px; color: var(--color-accent);">湯殿山 <span style="font-size: 1rem; color: #999;">- Future -</span></h2>
+                    <p style="margin-bottom: 30px; line-height: 1.8; font-size: var(--font-size-body);">
                         <strong>未来、再生の場所</strong><br><br>
                         「語るなかれ、聞くなかれ」とされた秘境。<br>
                         湧き出る湯、朱色の巨岩。<br>
