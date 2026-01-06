@@ -7,44 +7,50 @@ export function renderHeader() {
 
   header.innerHTML = `
     <div class="header-inner container" style="display: flex; justify-content: space-between; align-items: center; height: 80px; position: relative; z-index: 201;">
-      <div class="logo">
-        <a href="/" data-link style="font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 0.1em; font-weight: bold; text-decoration:none;">
+      
+      <!-- Logo -->
+      <div class="logo" style="flex-shrink: 0; margin-right: auto;">
+        <a href="/" data-link style="font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 0.1em; font-weight: bold; text-decoration:none; color: #333;">
           Well-Being Shonai
         </a>
       </div>
       
       <!-- Desktop Nav -->
-      <nav>
-        <ul style="display: flex; list-style: none; gap: 20px;">
-          <li><a href="/about" data-link>ABOUT</a></li>
-          <li><a href="/experience" data-link>EXPERIENCE</a></li>
-          <li><a href="/story" data-link>STORY</a></li>
-          <li><a href="/news" data-link>NEWS</a></li>
-          <li><a href="/contact" data-link>CONTACT</a></li>
+      <nav class="desktop-nav">
+        <ul style="display: flex; list-style: none; gap: 20px; align-items: center; margin: 0;">
+          <li><a href="/about" data-link>${t('nav_about')}</a></li>
+          <li><a href="/experience" data-link>${t('nav_exp')}</a></li>
+          <li><a href="/story" data-link>${t('nav_story')}</a></li>
+          <li><a href="/news" data-link>${t('nav_news')}</a></li>
+          <li><a href="/contact" data-link>${t('nav_contact')}</a></li>
         </ul>
       </nav>
 
-      <!-- Mobile Menu Button -->
-      <button class="mobile-menu-btn" style="display: none; background: none; border: none; cursor: pointer; z-index: 202;">
-        <div style="width: 30px; height: 2px; background: #333; margin: 6px 0;"></div>
-        <div style="width: 30px; height: 2px; background: #333; margin: 6px 0;"></div>
-        <div style="width: 30px; height: 2px; background: #333; margin: 6px 0;"></div>
-      </button>
+      <!-- Mobile Controls (Button + Lang) -->
+      <div class="header-controls" style="display: flex; align-items: center; gap: 15px;">
+          <!-- Mobile Menu Button -->
+          <button class="mobile-menu-btn" style="display: none; background: none; border: none; cursor: pointer; padding: 5px;">
+            <div style="width: 24px; height: 2px; background: #333; margin: 5px 0;"></div>
+            <div style="width: 24px; height: 2px; background: #333; margin: 5px 0;"></div>
+            <div style="width: 24px; height: 2px; background: #333; margin: 5px 0;"></div>
+          </button>
 
-      <div class="lang-switch" style="cursor: pointer; font-family: sans-serif; font-size: 0.9rem; margin-left: 15px;">
-        <span id="lang-jp" style="${lang === 'ja' ? 'font-weight:bold; text-decoration:underline;' : 'color:#999;'}">JP</span>
-        <span style="margin:0 5px;">/</span>
-        <span id="lang-en" style="${lang === 'en' ? 'font-weight:bold; text-decoration:underline;' : 'color:#999;'}">EN</span>
+          <!-- Lang Switch -->
+          <div class="lang-switch" style="cursor: pointer; font-family: sans-serif; font-size: 0.8rem;">
+            <span id="lang-jp" style="${lang === 'ja' ? 'font-weight:bold; text-decoration:underline;' : 'color:#999;'}">JP</span>
+            <span style="margin:0 3px;">/</span>
+            <span id="lang-en" style="${lang === 'en' ? 'font-weight:bold; text-decoration:underline;' : 'color:#999;'}">EN</span>
+          </div>
       </div>
     </div>
 
     <!-- Mobile Overlay -->
     <div class="mobile-nav-overlay">
-        <a href="/about" data-link>ABOUT</a>
-        <a href="/experience" data-link>EXPERIENCE</a>
-        <a href="/story" data-link>STORY</a>
-        <a href="/news" data-link>NEWS</a>
-        <a href="/contact" data-link>CONTACT</a>
+        <a href="/about" data-link>${t('nav_about')}</a>
+        <a href="/experience" data-link>${t('nav_exp')}</a>
+        <a href="/story" data-link>${t('nav_story')}</a>
+        <a href="/news" data-link>${t('nav_news')}</a>
+        <a href="/contact" data-link>${t('nav_contact')}</a>
         <div style="margin-top: 30px; cursor: pointer;">
             <span onclick="document.getElementById('lang-jp').click()">JP</span> / 
             <span onclick="document.getElementById('lang-en').click()">EN</span>

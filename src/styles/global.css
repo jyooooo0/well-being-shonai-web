@@ -146,13 +146,18 @@ a:hover {
 @media (max-width: 768px) {
 
   /* Hide Desktop Nav */
-  .header-inner nav {
-    display: none;
-    /* We will toggle a separate mobile menu or style this differently */
+  .desktop-nav {
+    display: none !important;
   }
 
+  /* Show Mobile Menu Button */
   .header-inner .mobile-menu-btn {
     display: block !important;
+  }
+
+  /* Adjust header controls for mobile */
+  .header-controls {
+    gap: 10px;
   }
 
   /* Mobile Overlay Menu */

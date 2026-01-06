@@ -9,12 +9,11 @@ export function Story() {
               <img src="${ASSETS.LEGACY_MAIN}" style="width: 100%; height: auto; border-radius: 4px;">
           </div>
           <div class="media-content" style="flex: 1;">
-            <h2 class="serif" style="font-size: 1.8rem; margin-bottom: 15px;">Dewa Sanzan Booklet</h2>
+            <h2 class="serif" style="font-size: 1.8rem; margin-bottom: 15px;">${t('story_booklet_title')}</h2>
             <p style="margin-bottom: 20px;">
-              出羽三山の歴史、思想、そして風景をまとめたデジタルブックレット。<br>
-              美しい写真とともに、庄内の精神世界への入口を提供します。
+              ${t('story_booklet_desc')}
             </p>
-            <a href="#" style="text-decoration: underline;">Read Online &rarr;</a>
+            <a href="#" style="text-decoration: underline;">${t('read_online')}</a>
           </div>
         </div>
 
@@ -23,11 +22,11 @@ export function Story() {
               <img src="${ASSETS.YUDONO_MAIN}" style="width: 100%; height: auto; border-radius: 4px;">
           </div>
           <div class="media-content" style="flex: 1; direction: ltr;">
-            <h2 class="serif" style="font-size: 1.8rem; margin-bottom: 15px;">Mummy of Shonai</h2>
+            <h2 class="serif" style="font-size: 1.8rem; margin-bottom: 15px;">${t('story_mummy_title')}</h2>
             <p style="margin-bottom: 20px;">
-              即身仏として残された僧侶たちの願いと、それを守り続ける人々の物語。
+              ${t('story_mummy_desc')}
             </p>
-             <a href="#" style="text-decoration: underline;">Read Story &rarr;</a>
+             <a href="#" style="text-decoration: underline;">${t('read_story')}</a>
           </div>
         </div>
       </div>

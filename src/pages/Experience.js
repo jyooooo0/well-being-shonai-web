@@ -26,17 +26,15 @@ export function Experience() {
                      </div>
                 </div>
                 <div class="text-wrap fade-in">
-                    <h2 class="serif" style="font-size: var(--font-size-h2); margin-bottom: 20px;">羽黒山 <span style="font-size: 1rem; color: #666;">- Present -</span></h2>
+                    <h2 class="serif" style="font-size: var(--font-size-h2); margin-bottom: 20px;">${t('haguro_name')} <span style="font-size: 1rem; color: #666;">${t('haguro_sub')}</span></h2>
                     <p style="margin-bottom: 30px; line-height: 1.8; font-size: var(--font-size-body);">
-                        <strong>現世の利益を願う山</strong><br><br>
-                        樹齢数百年を超える杉並木と、2,446段の石段。<br>
-                        一歩踏みしめるごとに、身体の重みと呼吸を感じる。<br>
-                        自身の肉体という「現世」に向き合う時間。
+                        <strong>${t('haguro_desc_title')}</strong><br><br>
+                        ${t('haguro_desc')}
                     </p>
                     <ul style="list-style: none; color: #666; font-size: 0.9rem; border-top: 1px solid #eee; padding-top: 20px;">
-                        <li>・国宝 五重塔</li>
-                        <li>・杉並木の参道</li>
-                        <li>・精進料理「斎館」</li>
+                        <li>${t('haguro_list_1')}</li>
+                        <li>${t('haguro_list_2')}</li>
+                        <li>${t('haguro_list_3')}</li>
                     </ul>
                 </div>
             </div>
@@ -52,17 +50,15 @@ export function Experience() {
                      </div>
                 </div>
                 <div class="text-wrap fade-in" style="direction: ltr;">
-                    <h2 class="serif" style="font-size: var(--font-size-h2); margin-bottom: 20px;">月山 <span style="font-size: 1rem; color: #666;">- Past -</span></h2>
+                    <h2 class="serif" style="font-size: var(--font-size-h2); margin-bottom: 20px;">${t('gassan_name')} <span style="font-size: 1rem; color: #666;">${t('gassan_sub')}</span></h2>
                     <p style="margin-bottom: 30px; line-height: 1.8; font-size: var(--font-size-body);">
-                        <strong>過去、死後の世界</strong><br><br>
-                        雲上の別世界。<br>
-                        高山植物と岩場、霧に包まれた静寂の稜線を行く。<br>
-                        思考を手放し、祖霊と交わる「夜」の世界体験。
+                        <strong>${t('gassan_desc_title')}</strong><br><br>
+                        ${t('gassan_desc')}
                     </p>
                      <ul style="list-style: none; color: #666; font-size: 0.9rem; border-top: 1px solid #eee; padding-top: 20px;">
-                        <li>・弥陀ヶ原湿原</li>
-                        <li>・月山神社本宮</li>
-                        <li>・雲海</li>
+                        <li>${t('gassan_list_1')}</li>
+                        <li>${t('gassan_list_2')}</li>
+                        <li>${t('gassan_list_3')}</li>
                     </ul>
                 </div>
             </div>
@@ -78,17 +74,15 @@ export function Experience() {
                      </div>
                 </div>
                 <div class="text-wrap fade-in">
-                    <h2 class="serif" style="font-size: var(--font-size-h2); margin-bottom: 20px; color: var(--color-accent);">湯殿山 <span style="font-size: 1rem; color: #999;">- Future -</span></h2>
+                    <h2 class="serif" style="font-size: var(--font-size-h2); margin-bottom: 20px; color: var(--color-accent);">${t('yudono_name')} <span style="font-size: 1rem; color: #999;">${t('yudono_sub')}</span></h2>
                     <p style="margin-bottom: 30px; line-height: 1.8; font-size: var(--font-size-body);">
-                        <strong>未来、再生の場所</strong><br><br>
-                        「語るなかれ、聞くなかれ」とされた秘境。<br>
-                        湧き出る湯、朱色の巨岩。<br>
-                        裸足でその温もりに触れ、生命の源泉として生まれ変わる。
+                        <strong>${t('yudono_desc_title')}</strong><br><br>
+                        ${t('yudono_desc')}
                     </p>
                     <ul style="list-style: none; color: #aaa; font-size: 0.9rem; border-top: 1px solid #333; padding-top: 20px;">
-                        <li>・湯殿山神社本宮</li>
-                        <li>・御神体（巨岩）</li>
-                        <li>・参籠所</li>
+                        <li>${t('yudono_list_1')}</li>
+                        <li>${t('yudono_list_2')}</li>
+                        <li>${t('yudono_list_3')}</li>
                     </ul>
                 </div>
             </div>
