@@ -15,17 +15,32 @@ export const dictionary = {
         latest_news: 'Latest News',
 
         // About
-        mission_title: 'Mission: 立ち返る力',
-        mission_text: '現代社会の中で失われつつある「静寂」と「自己との対話」。<br>庄内の宿坊文化と自然信仰をベースに、<br>心身をリセットし、新たな活力を得る体験を提供します。',
-        phil_title: 'Circulation of Life',
-        phil_text: '私たちが大切にしているのは「循環」です。<br>死と再生、過去と未来、自然と人間。<br>そのすべてが円環するように巡る世界で、<br>あなた自身の「本来の姿」に立ち返る旅を。',
-        unique_title: '3 Uniquenesses',
-        unique_1_title: '1. Modern Shukubo',
-        unique_1_text: '現代の宿坊として、宗教性を超えた普遍的な精神体験を提供します。',
-        unique_2_title: '2. Interpretation',
-        unique_2_text: '難解な思想を現代語とアートで翻訳・可視化し、直感的に伝えます。',
-        unique_3_title: '3. Nature & Cycle',
-        unique_3_text: '手つかずの自然の循環の中に身を置き、人間もその一部であることを体感する没入型プログラム。',
+        about_vision_title: 'ビジョン',
+        about_vision_text: '庄内で育まれる“よい状態”が<br class="desktop-only">世界に広がり、また庄内に還ってくる<br class="desktop-only">循環する社会',
+
+        about_mission_title: 'ミッション',
+        about_mission_text: '庄内にすでにある「立ち返る力」を、<br>ストーリーと構造（接点）として<br>世界へ、そして未来へつなぐ',
+        about_mission_note: '※立ち返る力＝元気になれる力　＆　庄内に戻ってきてしまう力',
+
+        strategy_title: '戦略コンセプト',
+        strategy_main: '地域と訪問者との長期的な関係性を育む',
+        strategy_sub: '（巡礼者たちは毎年出羽三山を訪れ、また山伏たちが全国各地の講員を訪問し、関係性を繋いでいくように。）',
+        strategy_bad: '一度きりの観光',
+        strategy_good: '関係性が続いていく',
+
+        unique_title: '独自性＝オンリーワンの組み合わせ',
+        unique_list_1_title: '1. 宿坊モデル',
+        unique_list_1_text: '長く続く関係性',
+        unique_list_2_title: '2. 生と死と再生',
+        unique_list_2_text: '出羽三山・即身仏という思想',
+        unique_list_3_title: '3. 現代的翻訳',
+        unique_list_3_text: '観光でも宗教でもないアプローチ',
+        unique_list_4_title: '4. 戻ってしまう力',
+        unique_list_4_text: '庄内に「戻る」を価値の中心に',
+        unique_note: '※この4つが崩れる事業はやらない',
+
+        corp_title: '法人紹介文',
+        corp_text: '一般社団法人Well-Being Shonaiは、庄内の暮らしの中に育まれてきた「立ち返る力」を、体験を通じて世界につないでいく団体です。<br><span class="en-text" style="font-size: 0.9em; display: block; margin-top: 1em; opacity: 0.8;">Well-Being Shonai is an organization based in Shonai, Japan, that connects the power of renewal nurtured in everyday life with the world through lived experiences.</span>',
 
         // Experience
         haguro_name: '羽黒山',
@@ -76,17 +91,32 @@ export const dictionary = {
         latest_news: 'Latest News',
 
         // About
-        mission_title: 'Mission: The Power to Return',
-        mission_text: 'The "silence" and "dialogue with oneself" being lost in modern society.<br>Based on Shonai\'s Shukubo culture and nature worship,<br>we provide experiences to reset mind and body and gain new vitality.',
-        phil_title: 'Circulation of Life',
-        phil_text: 'What we cherish is "Circulation".<br>Life and death, past and future, nature and humans.<br>In a world where everything circulates in a cycle,<br>embark on a journey to return to your "true self".',
-        unique_title: '3 Uniquenesses',
-        unique_1_title: '1. Modern Shukubo',
-        unique_1_text: 'As a modern temple lodging, we provide universal spiritual experiences beyond religion.',
-        unique_2_title: '2. Interpretation',
-        unique_2_text: 'We translate and visualize esoteric thoughts into modern language and art for intuitive understanding.',
-        unique_3_title: '3. Nature & Cycle',
-        unique_3_text: 'An immersive program where you place yourself in the pristine circulation of nature.',
+        about_vision_title: 'Vision',
+        about_vision_text: 'A society where the "well-being" nurtured in Shonai<br>spreads to the world and returns to Shonai in a cycle.',
+
+        about_mission_title: 'Mission',
+        about_mission_text: 'Connecting the "Power to Return" already present in Shonai<br>to the world and the future through stories and structures.',
+        about_mission_note: '*Power to Return = Power to become energetic & Power to retain connectedness',
+
+        strategy_title: 'Strategic Concept',
+        strategy_main: 'Nurturing long-term relationships between the region and visitors',
+        strategy_sub: '(Just as pilgrims visit Dewa Sanzan every year, and Yamabushi visit parishioners to connect relationships.)',
+        strategy_bad: 'One-time Tourism',
+        strategy_good: 'Lasting Relationships',
+
+        unique_title: 'Uniqueness',
+        unique_list_1_title: '1. Shukubo Model',
+        unique_list_1_text: 'Long-lasting relationships',
+        unique_list_2_title: '2. Life & Death & Rebirth',
+        unique_list_2_text: 'Philosophy of Dewa Sanzan',
+        unique_list_3_title: '3. Modern Translation',
+        unique_list_3_text: 'Beyond tourism and religion',
+        unique_list_4_title: '4. Power to Return',
+        unique_list_4_text: 'Centering on the pull of Shonai',
+        unique_note: '*We do not pursue businesses where these four are compromised.',
+
+        corp_title: 'About Us',
+        corp_text: 'Well-Being Shonai is an organization based in Shonai, Japan, that connects the power of renewal nurtured in everyday life with the world through lived experiences.',
 
         // Experience
         haguro_name: 'Mt. Haguro',

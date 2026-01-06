@@ -14,8 +14,8 @@ function PageHome() {
                  style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; mix-blend-mode: luminosity;">
             
             <div class="container" style="position: relative; z-index: 2; color: var(--color-text-light); text-align: center;">
-                <p class="fade-in serif" style="font-size: 1.2rem; margin-bottom: 2rem; letter-spacing: 0.2em;">${t('home_subtitle') || 'We circulate the "Power to Return".'}</p>
-                <h1 class="fade-in serif" style="font-size: 4rem; line-height: 1.2; letter-spacing: 0.1em; font-weight: normal;">
+                <p class="fade-in serif" style="font-size: clamp(1rem, 3vw, 1.2rem); margin-bottom: 2rem; letter-spacing: 0.2em;">${t('home_subtitle') || 'We circulate the "Power to Return".'}</p>
+                <h1 class="fade-in serif" style="font-size: var(--font-size-hero); line-height: 1.2; letter-spacing: 0.1em; font-weight: normal; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">
                     ${t('home_title') || 'Circulate the<br>Power to Return'}
                 </h1>
                 <div class="scrolldown fade-in" style="position: absolute; bottom: -150px; left: 50%; transform: translateX(-50%); opacity: 0.7;">

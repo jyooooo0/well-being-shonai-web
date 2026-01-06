@@ -117,9 +117,9 @@ a:hover {
 
 /* Fluid Typography */
 :root {
-  --font-size-hero: clamp(2rem, 8vw, 4rem);
-  /* Scales between 2rem and 4rem */
-  --font-size-h2: clamp(1.8rem, 5vw, 3rem);
+  --font-size-hero: clamp(1.8rem, 5vw, 4rem);
+  /* Reduced min size */
+  --font-size-h2: clamp(1.5rem, 4vw, 3rem);
   --font-size-body: clamp(0.9rem, 2vw, 1rem);
 }
 
@@ -131,7 +131,9 @@ a:hover {
   gap: 0;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 900px) {
+
+  /* Increased breakpoint */
   .grid-responsive {
     grid-template-columns: 1fr 1fr !important;
   }
@@ -143,21 +145,19 @@ a:hover {
   /* Hide on desktop by default */
 }
 
-@media (max-width: 768px) {
-
-  /* Hide Desktop Nav */
+/* Force hide desktop nav on mobile/tablet */
+@media (max-width: 900px) {
   .desktop-nav {
     display: none !important;
   }
 
-  /* Show Mobile Menu Button */
   .header-inner .mobile-menu-btn {
     display: block !important;
   }
 
   /* Adjust header controls for mobile */
   .header-controls {
-    gap: 10px;
+    gap: 15px;
   }
 
   /* Mobile Overlay Menu */
@@ -166,7 +166,6 @@ a:hover {
     inset: 0;
     background: rgba(255, 255, 255, 0.98);
     z-index: 200;
-    /* display: flex;  <-- We handle display toggle via JS/CSS class '.active' usually, or flex here */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -188,7 +187,6 @@ a:hover {
 
   .container {
     padding: 0 20px;
-    /* More padding on mobile */
   }
 
   /* Adjust Vertical Text for Mobile */
