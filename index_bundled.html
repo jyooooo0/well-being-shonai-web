@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Well-Being Shonai (Preview)</title>
+    <meta name="description" content="庄内の「立ち返る力」を世界へ。General Incorporated Association Well-Being Shonai">
+    <style>
+        /* CSS START */
+        :root {
+            /* Colors - Concept: Body's Voice / Deep Silent Nature */
+            --color-bg: #f4f8f9;
+            /* Mist White */
+            --color-bg-dark: #1A1A1A;
+            /* Ink Black (Base) */
+            --color-bg-forest: #1E3628;
+            /* Deep Forest Green */
+
+            --color-text: #1A1A1A;
+            /* Ink Black */
+            --color-text-light: #f4f8f9;
+            /* Mist White */
+            --color-text-muted: #8c9c96;
+            /* Muted Green-Grey */
+
+            --color-accent: #D9333F;
+            /* Vermilion (Torii/Life) */
+
+            --color-white: #ffffff;
+            --color-black: #0f0f12;
+
+            /* Fonts */
+            --font-base: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            --font-serif: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+
+            /* Spacing */
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 32px;
+            --spacing-xl: 64px;
+            --spacing-xxl: 120px;
+
+            /* Transitions */
+            --transition-fast: 0.3s ease;
+            --transition-slow: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            --transition-organic: 2.0s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-base);
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            line-height: 1.8;
+            overflow-x: hidden;
+            font-feature-settings: "palt";
+            letter-spacing: 0.05em;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .serif {
+            font-family: var(--font-serif);
+        }
+
+        /* Utilities */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 0.15em;
+            line-height: 2;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .h-full {
+            height: 100%;
+        }
+
+        .object-cover {
+            object-fit: cover;
+        }
+
+        @keyframes bg-flow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity var(--transition-fast);
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .blur-in {
+            opacity: 0;
+            filter: blur(15px);
+            transform: scale(0.95);
+            transition: opacity 2.5s ease, filter 2.5s ease, transform 2.5s ease;
+        }
+
+        .blur-in.visible {
+            opacity: 1;
+            filter: blur(0);
+            transform: scale(1);
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.02);
+            }
+        }
+
+        .breathing {
+            animation: breathe 5s ease-in-out infinite;
+        }
+
+        .img-live {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: kenBurns 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.1);
+            }
+        }
+
+        .hero-img-bg {
+            animation: kenBurns 30s ease-in-out infinite alternate;
+        }
+
+
+
+        /* CSS END */
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <header id="main-header"></header>
+        <main id="main-content"></main>
+        <footer id="main-footer"></footer>
+    </div>
+    <div id="cursor-stalker"></div>
+
+    <script>
+        /* BUNDLED JAVASCRIPT START */
+        (function () { // Wrap in IIFE to avoid global pollution if needed, though here we need shared scope for this bundle.
+
+            // --- assets_map.js ---
+            const ASSETS = {
+                HERO_BG: 'images/gassan/_DSC3213 (2025-10-01T02_43_15.093).jpg',
+                HERO_MIST_OVERLAY: 'images/hero.jpg',
+                ABOUT_BG: 'images/haguro/_DSC7919 (2025-09-26T05_26_50.423).jpg',
+                ABOUT_SUB: 'images/yudono/_DSC3469 (2025-10-16T06_51_06.579).jpg',
+                HAGURO_MAIN: 'images/haguro/_DSC7844 (2025-09-26T05_22_38.892).jpg',
+                HAGURO_STEPS: 'images/haguro/_DSC6875.jpg',
+                GASSAN_MAIN: 'images/gassan/_DSC3223 (2025-10-01T02_43_27.269).jpg',
+                GASSAN_RIDGE: 'images/gassan/DSC04484 (2025-10-01T02_41_10.573).jpg',
+                YUDONO_MAIN: 'images/yudono/DSC08170 (2025-10-16T06_55_16.423).jpg',
+                YUDONO_GATE: 'images/yudono/DSC08124 (2025-10-16T06_53_39.057).jpg',
+                LEGACY_MAIN: 'images/haguro/_DSC9917-Edit.jpg',
+                TOUR_SOKUSHINBUTSU: 'images/tour_sokushinbutsu.jpg',
+                TOUR_TYURENJI: 'images/tour_sokushinbutsu.jpg'
+            };
+
+            // --- i18n.js ---
+            const dictionary = {
+                ja: {
+                    // NAV
+                    nav_about: 'ABOUT', nav_exp: 'EXPERIENCE', nav_news: 'NEWS', nav_contact: 'CONTACT',
+
+                    // HOME
+                    home_title: '庄内の「立ち返る力」を、<br>世界に循環させる',
+                    home_subtitle: 'We circulate the "Power to Return" of Shonai to the world.',
+                    scroll: 'SCROLL',
+
+                    philosophy_v: '身体が先に学び、<br>心があとから頷く。',
+                    philosophy_body: '自然は管理すべき対象か、それとも人は自然の一部か。<br>現代社会の効率や情報の波から離れ、<br>私たちは「身体の声」を取り戻す旅に出ます。',
+                    philosophy_accent: '「受けたもう」から始まる、生まれ変わりの旅。',
+
+                    dewa_title: '出羽三山',
+                    dewa_subtitle: 'Dewa Sanzan: Journey of Rebirth',
+                    dewa_desc: '羽黒山（現世）、月山（過去）、湯殿山（未来）。<br>これら三山を巡ることは、生きながらにして<br>「死と再生」を体験する旅とされています。<br>2,446段の石段、霧に包まれた稜線、そして生命の源泉へ。',
+                    view_journey: 'View the Journey',
+
+                    legacy_title: '継承される祈り',
+                    legacy_text: '300年祈り続ける即身仏の存在と、<br>今もこの地で続く「講」の営み。<br>私たちはこの精神性を次代へ繋ぎます。',
+                    our_story: 'Our Story',
+
+                    // ABOUT
+                    corp_name: '一般社団法人 Well-Being Shonai',
+                    corp_slogan: '庄内の「立ち返る力」を、世界に循環させる',
+                    corp_desc_ja: '一般社団法人Well-Being Shonaiは、庄内の暮らしの中に育まれてきた「立ち返る力」を、体験を通じて世界につないでいく団体です。',
+
+                    vision_title: 'Vision',
+                    vision_text: '庄内で育まれる“よい状態”が<br>世界に広がり、また庄内に還ってくる<br>循環する社会',
+                    mission_title: 'Mission',
+                    mission_text: '庄内にすでにある「立ち返る力」を、<br>ストーリーと構造（接点）として<br>世界へ、そして未来へつなぐ',
+                    mission_note: '※立ち返る力＝元気になれる力 ＆ 庄内に戻ってきてしまう力',
+
+                    strat_title: 'Strategy Concept: 4 Uniqueness',
+                    strat_desc: '観光でも宗教でもない、現代的翻訳。<br>これら4つの要素が組み合わさることで、独自の価値を生み出します。',
+                    strat_1_title: '宿坊モデル', strat_1_desc: '一度きりの観光ではなく、長く続く関係性を育む。',
+                    strat_2_title: '死と再生の思想', strat_2_desc: '出羽三山・即身仏という精神性の核。',
+                    strat_3_title: '現代的翻訳', strat_3_desc: '難解な文脈を、現代の言葉とアートで可視化。',
+                    strat_4_title: '戻ってしまう力', strat_4_desc: '庄内の引力を価値の中心に置く。',
+
+                    members_title: 'Members',
+                    member_role_1: 'Representative / Guide',
+                    member_role_2: 'Coordinator',
+                    member_role_3: 'Yamabushi',
+
+                    // EXPERIENCE
+                    exp_intro_sub: 'JOURNEY OF REBIRTH',
+                    exp_intro_title: '生まれかわりの旅',
+                    exp_intro_text: '出羽三山（羽黒山・月山・湯殿山）を巡ることは、<br>「死と再生」を辿る旅とされています。<br>現世から来世、そして未来へ。<br>身体を通して、魂を生まれ変わらせる体験です。',
+
+                    haguro_title: '羽黒山', haguro_sub: '- Present -',
+                    haguro_cat: '現世の利益を願う山',
+                    haguro_desc: '樹齢数百年を超える杉並木と、2,446段の石段。<br>一歩踏みしめるごとに、身体の重みと呼吸を感じる。<br>自身の肉体という「現世」に向き合う時間。',
+                    haguro_list_1: '・国宝 五重塔', haguro_list_2: '・杉並木の参道', haguro_list_3: '・精進料理「斎館」',
+
+                    gassan_title: '月山', gassan_sub: '- Past -',
+                    gassan_cat: '過去、死後の世界',
+                    gassan_desc: '雲上の別世界。<br>高山植物と岩場、霧に包まれた静寂の稜線を行く。<br>思考を手放し、祖霊と交わる「夜」の世界体験。',
+                    gassan_list_1: '・弥陀ヶ原湿原', gassan_list_2: '・月山神社本宮', gassan_list_3: '・雲海',
+
+                    yudono_title: '湯殿山', yudono_sub: '- Future -',
+                    yudono_cat: '未来、再生の場所',
+                    yudono_desc: '「語るなかれ、聞くなかれ」とされた秘境。<br>湧き出る湯、朱色の巨岩。<br>裸足でその温もりに触れ、生命の源泉として生まれ変わる。',
+                    yudono_list_1: '・湯殿山神社本宮', yudono_list_2: '・御神体（巨岩）', yudono_list_3: '・参籠所',
+
+                    other_title: 'Other Journeys',
+                    tour_soku_title: '注連寺・即身仏',
+                    tour_soku_desc: '自らの体を捧げ、衆生救済を願った即身仏と対面する。<br>命の使い道を問う、静謐な時間。',
+                    view_details: 'View Details',
+
+                    tour_season_title: 'Seasonal Retreats',
+                    tour_season_desc: '春の山菜、秋の紅葉、冬の雪。<br>庄内の四季と共に在る、季節限定のリトリートプログラム。',
+                    coming_soon: 'Coming Soon',
+
+                    cta_title: 'あなただけの巡礼を計画する',
+                    contact_btn: 'Contact for Details',
+
+                    // NEWS
+                    news_title: 'Latest News',
+                    news_1_title: '春の「出羽三山再生の旅」募集開始のお知らせ',
+                    news_1_date: '2026.04.01',
+                    news_1_desc: '雪解け水とともに始まる、春の特別リトリートプログラム。参加者の募集を開始いたしました。',
+                    news_2_title: 'ウェブサイトをリニューアルしました',
+                    news_2_date: '2026.03.15',
+                    news_2_desc: 'Well-Being Shonaiの公式サイトを一新しました。「立ち返る力」をテーマに、より深い精神性をお届けします。',
+                    news_3_title: '[Media] 雑誌「ソトコト」に掲載されました',
+                    news_3_date: '2026.02.20',
+                    news_3_desc: '3月号の特集「地方の精神性」にて、当団体の取り組みが紹介されています。',
+
+                    // CONTACT
+                    contact_title: 'Contact Us',
+                    contact_desc: 'ツアーへのご参加、取材、その他お問い合わせはこちらからお願いいたします。',
+                    form_name: 'お名前', form_email: 'メールアドレス', form_subject: '件名', form_message: 'お問い合わせ内容',
+                    form_subject_option_1: 'ツアーについて',
+                    form_subject_option_2: '取材・メディア',
+                    form_subject_option_3: 'その他',
+                    btn_send: '送信する'
+                },
+                en: {
+                    // NAV
+                    nav_about: 'ABOUT', nav_exp: 'EXPERIENCE', nav_news: 'NEWS', nav_contact: 'CONTACT',
+
+                    // HOME
+                    home_title: 'Circulate the "Power to Return" of Shonai to the World',
+                    home_subtitle: 'A platform for regeneration and connection.',
+                    scroll: 'SCROLL',
+
+                    philosophy_v: 'The body learns first,<br>the mind agrees later.',
+                    philosophy_body: 'Is nature something to be managed, or are humans part of nature?<br>Away from the efficiency and waves of information of modern society,<br>we embark on a journey to regain the "voice of the body".',
+                    philosophy_accent: 'A journey of rebirth, beginning with "Uketamou" (I accept).',
+
+                    dewa_title: 'Dewa Sanzan',
+                    dewa_subtitle: 'Three Mountains of Dewa',
+                    dewa_desc: 'Mt. Haguro (Present), Mt. Gassan (Past), Mt. Yudono (Future).<br>Pilgrimage to these three mountains is considered a journey<br>of experiencing "death and rebirth" while alive.<br>2,446 stone steps, ridges wrapped in mist, and to the source of life.',
+                    view_journey: 'View the Journey',
+
+                    legacy_title: 'Inherited Prayer',
+                    legacy_text: 'The existence of Sokushinbutsu (Living Buddhas) praying for 300 years,<br>and the activities of "Ko" (pilgrimage groups) continuing in this land.<br>We connect this spirituality to the next generation.',
+                    our_story: 'Our Story',
+
+                    // ABOUT
+                    corp_name: 'General Incorporated Association Well-Being Shonai',
+                    corp_slogan: 'Circulating the "Power to Return" of Shonai to the World',
+                    corp_desc_ja: 'Well-Being Shonai is an organization based in Shonai, Japan, that connects the power of renewal nurtured in everyday life with the world through lived experiences.',
+
+                    vision_title: 'Vision',
+                    vision_text: 'A circular society where the "well-being" nurtured in Shonai<br>spreads to the world and returns to Shonai.',
+                    mission_title: 'Mission',
+                    mission_text: 'Connecting the "Power to Return" already existing in Shonai<br>to the world and the future<br>as stories and structures (touchpoints).',
+                    mission_note: '* Power to Return = Power to become energetic & Power to make you want to return to Shonai',
+
+                    strat_title: 'Strategy Concept: 4 Uniqueness',
+                    strat_desc: 'Modern translation, neither just tourism nor religion.<br>Combining these 4 elements creates unique value.',
+                    strat_1_title: 'Shukubo Model', strat_1_desc: 'Fostering long-term relationships, not one-time tourism.',
+                    strat_2_title: 'Life, Death & Rebirth', strat_2_desc: 'The core spirituality of Dewa Sanzan and Sokushinbutsu.',
+                    strat_3_title: 'Modern Translation', strat_3_desc: 'Visualizing complex context with modern language and art.',
+                    strat_4_title: 'Power to Return', strat_4_desc: 'Placing the gravitational pull of Shonai at the center of value.',
+
+                    members_title: 'Members',
+                    member_role_1: 'Representative / Guide',
+                    member_role_2: 'Coordinator',
+                    member_role_3: 'Yamabushi',
+
+                    // EXPERIENCE
+                    exp_intro_sub: 'JOURNEY OF REBIRTH',
+                    exp_intro_title: 'The Journey of Rebirth',
+                    exp_intro_text: 'Visiting Dewa Sanzan (Mt. Haguro, Mt. Gassan, Mt. Yudono)<br>is considered a journey tracing "Death and Rebirth".<br>From the present to the afterlife, and then to the future.<br>Experience the rebirth of the soul through the body.',
+
+                    haguro_title: 'Mt. Haguro', haguro_sub: '- Present -',
+                    haguro_cat: 'Mountain praying for worldly benefits',
+                    haguro_desc: 'Cedar avenue over hundreds of years old and 2,446 stone steps.<br>With each step, feel the weight of your body and breath.<br>Time to face the "Present" of your own physical body.',
+                    haguro_list_1: '・National Treasure Five-story Pagoda', haguro_list_2: '・Cedar Avenue', haguro_list_3: '・Shojin Cuisine "Saikan"',
+
+                    gassan_title: 'Mt. Gassan', gassan_sub: '- Past -',
+                    gassan_cat: 'The Past, The World after Death',
+                    gassan_desc: 'Another world above the clouds.<br>Alpine plants, rocky areas, walking on silent ridges wrapped in mist.<br>Letting go of thoughts, experiencing the "Night" world communing with ancestors.',
+                    gassan_list_1: '・Midagahara Wetlands', gassan_list_2: '・Gasssan Shrine Main Hall', gassan_list_3: '・Sea of Cloud',
+
+                    yudono_title: 'Mt. Yudono', yudono_sub: '- Future -',
+                    yudono_cat: 'The Future, Place of Rebirth',
+                    yudono_desc: 'A sacred place where "You must not speak, you must not ask".<br>Gushing hot water, towering vermilion rocks.<br>Touching the warmth barefoot, reborn as the source of life.',
+                    yudono_list_1: '・Yudono Shrine Main Hall', yudono_list_2: '・The Goshintai (Giant Rock)', yudono_list_3: '・Sanrosho (Lodging)',
+
+                    other_title: 'Other Journeys',
+                    tour_soku_title: 'Churenji & Sokushinbutsu',
+                    tour_soku_desc: 'Face the Sokushinbutsu who sacrificed their own bodies wishing for the salvation of all beings.<br>A serene time to question the use of life.',
+                    view_details: 'View Details',
+
+                    tour_season_title: 'Seasonal Retreats',
+                    tour_season_desc: 'Spring wild vegetables, Autumn foliage, Winter snow.<br>Seasonal retreat programs existing with Shonai\'s four seasons.',
+                    coming_soon: 'Coming Soon',
+
+                    cta_title: 'Plan Your Pilgrimage',
+                    contact_btn: 'Contact for Details',
+
+                    // NEWS
+                    news_title: 'Latest News',
+                    news_1_title: 'Applications open for Spring "Dewa Sanzan Rebirth Journey"',
+                    news_1_date: '2026.04.01',
+                    news_1_desc: 'Special spring retreat program starting with melting snow. We have started accepting applications.',
+                    news_2_title: 'Website Renewed',
+                    news_2_date: '2026.03.15',
+                    news_2_desc: 'Well-Being Shonai official site has been renewed. Delivering deeper spirituality under the theme of "Power to Return".',
+                    news_3_title: '[Media] Featured in "Sotokoto" Magazine',
+                    news_3_date: '2026.02.20',
+                    news_3_desc: 'Our organization\'s initiatives are introduced in the March issue feature "Spirituality of Regions".',
+
+                    // CONTACT
+                    contact_title: 'Contact Us',
+                    contact_desc: 'Please contact us here for tour partipation, media inquiries, and other questions.',
+                    form_name: 'Name', form_email: 'Email', form_subject: 'Subject', form_message: 'Message',
+                    form_subject_option_1: 'About Tours',
+                    form_subject_option_2: 'Media Inquiry',
+                    form_subject_option_3: 'Other',
+                    btn_send: 'Send Message'
+                }
+            };
+
+            let currentLang = 'ja';
+
+            function getLang() { return currentLang; }
+            function setLang(lang) {
+                currentLang = lang;
+                document.documentElement.lang = lang;
+            }
+            function t(key) { return dictionary[currentLang][key] || key; }
+
+            // --- utils/cursor.js ---
+            function initCursor() {
+                const cursor = document.getElementById('cursor-stalker');
+                if (!cursor) return;
+                Object.assign(cursor.style, {
+                    position: 'fixed', top: '0', left: '0', width: '20px', height: '20px',
+                    borderRadius: '50%', backgroundColor: 'rgba(255, 255, 255, 0.5)', pointerEvents: 'none',
+                    transform: 'translate(-50%, -50%)', zIndex: '9999',
+                    transition: 'transform 0.05s linear, width 0.3s, height 0.3s',
+                    mixBlendMode: 'difference'
+                });
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+                });
+                document.addEventListener('mouseover', (e) => {
+                    if (e.target.closest('a') || e.target.closest('button') || e.target.closest('.cursor-hover')) {
+                        cursor.style.width = '60px'; cursor.style.height = '60px';
+                    }
+                });
+                document.addEventListener('mouseout', (e) => {
+                    if (e.target.closest('a') || e.target.closest('button') || e.target.closest('.cursor-hover')) {
+                        cursor.style.width = '20px'; cursor.style.height = '20px';
+                    }
+                });
+            }
+
+            // --- utils/animations.js ---
+            function initAnimations() {
+                const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                document.querySelectorAll('.fade-in, .blur-in').forEach(el => observer.observe(el));
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.scrollY;
+                    document.querySelectorAll('.hero-bg-anim').forEach(bg => {
+                        bg.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    });
+                });
+            }
+
+            // --- VISUALS & ANIMATIONS ---
+
+            // Canvas Mist/Orb Animation
+            function initHeroAnimation() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const hero = document.querySelector('.hero');
+                const container = document.querySelector('.hero-bg-anim');
+
+                if (!container) return;
+                container.innerHTML = '';
+                container.appendChild(canvas);
+
+                let width, height;
+                let particles = [];
+
+                function resize() {
+                    width = canvas.width = hero.offsetWidth;
+                    height = canvas.height = hero.offsetHeight;
+                }
+
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * width;
+                        this.y = Math.random() * height;
+                        this.vx = (Math.random() - 0.5) * 0.5;
+                        this.vy = (Math.random() - 0.5) * 0.5;
+                        this.size = Math.random() * 100 + 50;
+                        this.alpha = Math.random() * 0.3;
+                        this.cycle = Math.random() * Math.PI * 2;
+                    }
+                    update() {
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        this.cycle += 0.01;
+
+                        if (this.x < -100) this.x = width + 100;
+                        if (this.x > width + 100) this.x = -100;
+                        if (this.y < -100) this.y = height + 100;
+                        if (this.y > height + 100) this.y = -100;
+                    }
+                    draw() {
+                        ctx.beginPath();
+                        // Gradient for "soft light" feel
+                        const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                        g.addColorStop(0, `rgba(255, 255, 255, ${this.alpha * (0.5 + 0.5 * Math.sin(this.cycle))})`);
+                        g.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                        ctx.fillStyle = g;
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                for (let i = 0; i < 15; i++) particles.push(new Particle());
+
+                function animate() {
+                    ctx.clearRect(0, 0, width, height);
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+                    requestAnimationFrame(animate);
+                }
+
+                window.addEventListener('resize', resize);
+                resize();
+                animate();
+            }
+
+            // --- I18N ---
+            // ... (Keep existing i18n logic if needed, but here we assume it's stable) ...
+            // For brevity in this replacement, we focus on the PAGE components update.
+
+            // --- PAGES ---
+            function PageHome() {
+                const isJa = currentLang === 'ja';
+                const philStyle = isJa
+                    ? "font-size: 2rem; height: 400px; margin-bottom: var(--spacing-xl); border-right: 1px solid var(--color-accent); padding-right: 20px;"
+                    : "font-size: 2.5rem; line-height: 1.4; margin-bottom: var(--spacing-xl); text-align: center; border-bottom: 1px solid var(--color-accent); padding-bottom: 40px; width: 100%; max-width: 900px;";
+                const philClass = isJa ? "vertical-text serif fade-in" : "serif fade-in";
+
+                return `
+                <div class="page-home">
+                    
+                    <!-- HERO: Noise vs Silence -->
+                    <section class="hero" style="height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--color-bg-dark);">
+                        <div class="hero-bg-anim" style="position: absolute; inset: 0; z-index: 0; opacity: 0.4;"></div>
+                        
+                        <img src="${ASSETS.HERO_BG}" class="hero-img-bg img-live" 
+                             style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; mix-blend-mode: luminosity;">
+                        
+                        <div class="container" style="position: relative; z-index: 2; color: var(--color-text-light); text-align: center;">
+                            <p class="fade-in serif" style="font-size: 1.2rem; margin-bottom: 2rem; letter-spacing: 0.2em;">${t('home_subtitle')}</p>
+                            <h1 class="blur-in serif breathing" style="font-size: 4rem; line-height: 1.2; letter-spacing: 0.1em; font-weight: normal;">
+                                ${t('home_title')}
+                            </h1>
+                        </div>
+                         <div class="scrolldown fade-in" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); opacity: 0.8; z-index: 3;">
+                            <span style="writing-mode: vertical-rl; letter-spacing: 0.2em; font-size: 0.8rem; color: #fff; text-shadow: 0 0 5px rgba(0,0,0,0.5);">${t('scroll')}</span>
+                        </div>
+                    </section>
+
+                    <!-- PHILOSOPHY -->
+                    <section class="philosophy" style="padding: var(--spacing-xxl) 0; position: relative; background-color: var(--color-bg);">
+                        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+                            <div class="${philClass}" style="${philStyle}">
+                                ${t('philosophy_v')}
+                            </div>
+                            <div class="content max-w-800 fade-in" style="text-align: center; max-width: 700px; line-height: 2.4;">
+                                <p class="serif" style="margin-bottom: 2rem; font-feature-settings: 'palt'; font-size: 1.1rem;">
+                                    ${t('philosophy_body')}
+                                </p>
+                                <p class="serif" style="color: var(--color-accent); font-size: 1.2rem;">
+                                    ${t('philosophy_accent')}
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- DEWA SANZAN SUMMARY (Unified) -->
+                    <section class="dewa-sanzan-summary" style="background-color: #1a1a1a; color: #fff; padding: var(--spacing-xxl) 0;">
+                        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                            <div class="text-content fade-in">
+                                <h2 class="serif" style="font-size: 3rem; margin-bottom: 30px; border-left: 4px solid var(--color-accent); padding-left: 20px;">${t('dewa_title')}</h2>
+                                <p class="serif" style="font-size: 1.5rem; margin-bottom: 20px; color: #aaa;">${t('dewa_subtitle')}</p>
+                                <p style="line-height: 2; margin-bottom: 40px; color: #ddd;">
+                                    ${t('dewa_desc')}
+                                </p>
+                                <a href="#/experience" class="btn-link" style="color: #fff; border: 1px solid #fff; padding: 12px 30px; transition: all 0.3s;">${t('view_journey')}</a>
+                            </div>
+                            <div class="image-grid fade-in" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                                <img src="${ASSETS.HAGURO_MAIN}" class="img-live" style="width: 100%; height: 200px; object-fit: cover; grid-column: 1 / 3;">
+                                <img src="${ASSETS.GASSAN_MAIN}" class="img-live" style="width: 100%; height: 150px; object-fit: cover;">
+                                <img src="${ASSETS.YUDONO_MAIN}" class="img-live" style="width: 100%; height: 150px; object-fit: cover;">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- LEGACY & CLOSING -->
+                    <section class="legacy" style="padding: var(--spacing-xxl) 0; position: relative; color: #fff;">
+                        <img src="${ASSETS.LEGACY_MAIN}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                        <div class="overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.6); z-index: 1;"></div>
+                        <div class="container" style="position: relative; z-index: 2; text-align: center;">
+                            <h2 class="serif fade-in" style="font-size: 2.5rem; margin-bottom: 2rem;">${t('legacy_title')}</h2>
+                            <p class="fade-in" style="max-width: 600px; margin: 0 auto 3rem; line-height: 2;">
+                                ${t('legacy_text')}
+                            </p>
+                            <a href="#/about" class="btn-link fade-in" style="display: inline-block; border: 1px solid #fff; padding: 10px 30px; color: #fff;">${t('our_story')}</a>
+                        </div>
+                    </section>
+
+                </div>
+                `;
+            }
+
+            function PageAbout() {
+                return `
+                <div class="page-about">
+                    
+                    <!-- HERO / CORPORATE PROFILE with Background -->
+                    <section class="corporate-intro fade-in" style="position: relative; padding: 150px 0 100px; color: #fff; text-align: center; margin-bottom: 0;">
+                        <img src="images/about_hero.png" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(0.6);">
+                        
+                        <div class="container">
+                            <h1 class="serif" style="font-size: 2.5rem; margin-bottom: 2rem; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">${t('corp_name')}</h1>
+                            <p class="serif" style="font-size: 1.2rem; margin-bottom: 3rem; color: rgba(255,255,255,0.9); letter-spacing: 0.1em; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">${t('corp_slogan')}</p>
+                            <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 40px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); max-width: 800px; margin: 0 auto;">
+                                <p style="line-height: 2;">
+                                    <span class="lang-text" style="font-size: 1.1rem;">${t('corp_desc_ja')}</span><br><br>
+                                    <span style="font-family: sans-serif; opacity: 0.8; font-size: 0.9rem;">
+                                        Well-Being Shonai is an organization based in Shonai, Japan, that connects the power of renewal nurtured in everyday life with the world through lived experiences.
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- VISION & MISSION -->
+                    <section class="vision-mission" style="padding: 100px 0; background: linear-gradient(to bottom, #f9f9f9, #fff);">
+                        <div class="container fade-in">
+                            <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+                                <div class="vm-block" style="background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+                                    <h2 class="serif" style="color: var(--color-accent); margin-bottom: 20px; font-size: 2rem;">${t('vision_title')}</h2>
+                                    <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; line-height: 1.8;">${t('vision_text')}</p>
+                                </div>
+                                <div class="vm-block" style="background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+                                    <h2 class="serif" style="color: var(--color-accent); margin-bottom: 20px; font-size: 2rem;">${t('mission_title')}</h2>
+                                    <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; line-height: 1.8;">${t('mission_text')}</p>
+                                    <p style="font-size: 0.9rem; color: #666; border-top: 1px solid #eee; padding-top: 15px;">${t('mission_note')}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- STRATEGY CONCEPT -->
+                    <section class="strategy fade-in" style="padding: 100px 0; background: #fff;">
+                        <div class="container">
+                            <h2 class="serif text-center" style="font-size: 2.5rem; margin-bottom: 20px;">${t('strat_title')}</h2>
+                            <p class="text-center" style="margin-bottom: 80px; color: #666;">${t('strat_desc')}</p>
+                            
+                            <div class="strategy-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;">
+                                <div class="strategy-card" style="display: flex; align-items: center; gap: 30px; padding: 40px; background: #fafafa; border-radius: 8px; transition: transform 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.02);">
+                                    <div class="icon-wrap" style="flex: 0 0 100px; height: 100px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 50%; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                                        <img src="images/icon_shukubo.png" style="width: 100%; height: 100%; object-fit: contain;">
+                                    </div>
+                                    <div>
+                                        <h3 class="serif" style="margin-bottom: 15px; font-size: 1.4rem;">${t('strat_1_title')}</h3>
+                                        <p style="font-size: 0.95rem; color: #666; line-height: 1.6;">${t('strat_1_desc')}</p>
+                                    </div>
+                                </div>
+                                <div class="strategy-card" style="display: flex; align-items: center; gap: 30px; padding: 40px; background: #fafafa; border-radius: 8px; transition: transform 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.02);">
+                                    <div class="icon-wrap" style="flex: 0 0 100px; height: 100px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 50%; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                                        <img src="images/icon_rebirth.png" style="width: 100%; height: 100%; object-fit: contain;">
+                                    </div>
+                                    <div>
+                                        <h3 class="serif" style="margin-bottom: 15px; font-size: 1.4rem;">${t('strat_2_title')}</h3>
+                                        <p style="font-size: 0.95rem; color: #666; line-height: 1.6;">${t('strat_2_desc')}</p>
+                                    </div>
+                                </div>
+                                <div class="strategy-card" style="display: flex; align-items: center; gap: 30px; padding: 40px; background: #fafafa; border-radius: 8px; transition: transform 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.02);">
+                                    <div class="icon-wrap" style="flex: 0 0 100px; height: 100px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 50%; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                                        <img src="images/icon_modern.png" style="width: 100%; height: 100%; object-fit: contain;">
+                                    </div>
+                                    <div>
+                                        <h3 class="serif" style="margin-bottom: 15px; font-size: 1.4rem;">${t('strat_3_title')}</h3>
+                                        <p style="font-size: 0.95rem; color: #666; line-height: 1.6;">${t('strat_3_desc')}</p>
+                                    </div>
+                                </div>
+                                <div class="strategy-card" style="display: flex; align-items: center; gap: 30px; padding: 40px; background: #fafafa; border-radius: 8px; transition: transform 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.02);">
+                                    <div class="icon-wrap" style="flex: 0 0 100px; height: 100px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 50%; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                                        <img src="images/icon_return.png" style="width: 100%; height: 100%; object-fit: contain;">
+                                    </div>
+                                    <div>
+                                        <h3 class="serif" style="margin-bottom: 15px; font-size: 1.4rem;">${t('strat_4_title')}</h3>
+                                        <p style="font-size: 0.95rem; color: #666; line-height: 1.6;">${t('strat_4_desc')}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="members fade-in" style="padding: 100px 0; background: #f9f9f9;">
+                        <div class="container">
+                            <h2 class="serif text-center" style="margin-bottom: 60px; font-size: 2rem;">${t('members_title')}</h2>
+                            <div class="member-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center;">
+                                <div class="member-card">
+                                    <div style="width: 150px; height: 150px; background: #ddd; border-radius: 50%; margin: 0 auto 20px; overflow: hidden;">
+                                        <img src="https://placehold.co/150x150/ccc/666?text=M" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <h3 style="font-size: 1.1rem; margin-bottom: 5px;">Member Name</h3>
+                                    <p style="color: #888; font-size: 0.9rem;">${t('member_role_1')}</p>
+                                </div>
+                                 <div class="member-card">
+                                    <div style="width: 150px; height: 150px; background: #ddd; border-radius: 50%; margin: 0 auto 20px; overflow: hidden;">
+                                        <img src="https://placehold.co/150x150/ccc/666?text=M" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <h3 style="font-size: 1.1rem; margin-bottom: 5px;">Member Name</h3>
+                                    <p style="color: #888; font-size: 0.9rem;">${t('member_role_2')}</p>
+                                </div>
+                                 <div class="member-card">
+                                    <div style="width: 150px; height: 150px; background: #ddd; border-radius: 50%; margin: 0 auto 20px; overflow: hidden;">
+                                        <img src="https://placehold.co/150x150/ccc/666?text=M" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <h3 style="font-size: 1.1rem; margin-bottom: 5px;">Member Name</h3>
+                                    <p style="color: #888; font-size: 0.9rem;">${t('member_role_3')}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>`;
+            }
+
+            function PageExperience() {
+                return `
+                <div class="page-experience">
+                    
+                    <!-- INTRO -->
+                    <header class="exp-header" style="padding: 150px 0 80px; text-align: center; background: var(--color-bg);">
+                        <div class="container">
+                            <p class="fade-in serif" style="color: var(--color-accent); letter-spacing: 0.2em; margin-bottom: 1rem;">${t('exp_intro_sub')}</p>
+                            <h1 class="fade-in serif" style="font-size: 3rem; margin-bottom: 2rem;">${t('exp_intro_title')}</h1>
+                            <p class="fade-in" style="max-width: 600px; margin: 0 auto; line-height: 2;">
+                                ${t('exp_intro_text')}
+                            </p>
+                        </div>
+                    </header>
+
+                    <!-- 1. HAGURO -->
+                    <section class="exp-section" style="padding: 100px 0;">
+                        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                            <div class="img-wrap fade-in" style="position: relative; height: 500px; overflow: hidden;">
+                                <img src="${ASSETS.HAGURO_MAIN}" class="img-live" style="width: 100%; height: 100%; object-fit: cover;">
+                                <div style="position: absolute; bottom: 20px; left: 20px; color: #fff; z-index: 2;">
+                                    <span style="font-size: 3rem; font-family: var(--font-serif); opacity: 0.8;">01</span>
+                                </div>
+                            </div>
+                            <div class="text-wrap fade-in">
+                                <h2 class="serif" style="font-size: 2.5rem; margin-bottom: 20px;">${t('haguro_title')} <span style="font-size: 1rem; color: #666;">${t('haguro_sub')}</span></h2>
+                                <p style="margin-bottom: 30px; line-height: 1.8;">
+                                    <strong>${t('haguro_cat')}</strong><br><br>
+                                    ${t('haguro_desc')}
+                                </p>
+                                <ul style="list-style: none; color: #666; font-size: 0.9rem; border-top: 1px solid #eee; padding-top: 20px;">
+                                    <li>${t('haguro_list_1')}</li>
+                                    <li>${t('haguro_list_2')}</li>
+                                    <li>${t('haguro_list_3')}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 2. GASSAN -->
+                    <section class="exp-section" style="padding: 100px 0; background: #f4f8f9;">
+                        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; direction: rtl;">
+                            <div class="img-wrap fade-in" style="position: relative; height: 500px; overflow: hidden;">
+                                <img src="${ASSETS.GASSAN_MAIN}" class="img-live" style="width: 100%; height: 100%; object-fit: cover;">
+                                <div style="position: absolute; bottom: 20px; right: 20px; color: #fff; z-index: 2;">
+                                    <span style="font-size: 3rem; font-family: var(--font-serif); opacity: 0.8;">02</span>
+                                </div>
+                            </div>
+                            <div class="text-wrap fade-in" style="direction: ltr;">
+                                <h2 class="serif" style="font-size: 2.5rem; margin-bottom: 20px;">${t('gassan_title')} <span style="font-size: 1rem; color: #666;">${t('gassan_sub')}</span></h2>
+                                <p style="margin-bottom: 30px; line-height: 1.8;">
+                                    <strong>${t('gassan_cat')}</strong><br><br>
+                                    ${t('gassan_desc')}
+                                </p>
+                                <ul style="list-style: none; color: #666; font-size: 0.9rem; border-top: 1px solid #eee; padding-top: 20px;">
+                                    <li>${t('gassan_list_1')}</li>
+                                    <li>${t('gassan_list_2')}</li>
+                                    <li>${t('gassan_list_3')}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 3. YUDONO -->
+                    <section class="exp-section" style="padding: 100px 0; background: #1a1a1a; color: #fff;">
+                        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                            <div class="img-wrap fade-in" style="position: relative; height: 500px; overflow: hidden;">
+                                <img src="${ASSETS.YUDONO_MAIN}" class="img-live" style="width: 100%; height: 100%; object-fit: cover;">
+                                <div style="position: absolute; bottom: 20px; left: 20px; color: #fff; z-index: 2;">
+                                    <span style="font-size: 3rem; font-family: var(--font-serif); opacity: 0.8;">03</span>
+                                </div>
+                            </div>
+                            <div class="text-wrap fade-in">
+                                <h2 class="serif" style="font-size: 2.5rem; margin-bottom: 20px; color: var(--color-accent);">${t('yudono_title')} <span style="font-size: 1rem; color: #999;">${t('yudono_sub')}</span></h2>
+                                <p style="margin-bottom: 30px; line-height: 1.8;">
+                                    <strong>${t('yudono_cat')}</strong><br><br>
+                                    ${t('yudono_desc')}
+                                </p>
+                                <ul style="list-style: none; color: #aaa; font-size: 0.9rem; border-top: 1px solid #333; padding-top: 20px;">
+                                    <li>${t('yudono_list_1')}</li>
+                                    <li>${t('yudono_list_2')}</li>
+                                    <li>${t('yudono_list_3')}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- OTHER TOURS -->
+                    <section class="other-tours" style="padding: 100px 0; background: #fff;">
+                        <div class="container">
+                            <h2 class="serif fade-in" style="font-size: 2.5rem; text-align: center; margin-bottom: 60px;">${t('other_title')}</h2>
+                            <div class="tour-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                                
+                                <article class="tour-card fade-in">
+                                    <div class="img-wrap" style="height: 250px; overflow: hidden; margin-bottom: 20px;">
+                                        <img src="${ASSETS.LEGACY_MAIN}" class="img-live" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <h3 class="serif" style="font-size: 1.5rem; margin-bottom: 10px;">${t('tour_soku_title')}</h3>
+                                    <p style="color: #666; margin-bottom: 20px;">
+                                        ${t('tour_soku_desc')}
+                                    </p>
+                                    <button class="btn-link">${t('view_details')}</button>
+                                </article>
+
+                                 <article class="tour-card fade-in" style="animation-delay: 0.1s;">
+                                    <div class="img-wrap" style="height: 250px; overflow: hidden; margin-bottom: 20px;">
+                                        <img src="${ASSETS.HERO_BG}" class="img-live" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%);">
+                                    </div>
+                                    <h3 class="serif" style="font-size: 1.5rem; margin-bottom: 10px;">${t('tour_season_title')}</h3>
+                                    <p style="color: #666; margin-bottom: 20px;">
+                                        ${t('tour_season_desc')}
+                                    </p>
+                                    <button class="btn-link">${t('coming_soon')}</button>
+                                </article>
+
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- CTA -->
+                    <section class="cta" style="padding: 100px 0; text-align: center;">
+                        <h2 class="serif fade-in" style="font-size: 2rem; margin-bottom: 40px;">${t('cta_title')}</h2>
+                        <a href="#/contact" class="btn-primary fade-in" style="background: var(--color-accent); color: #fff; padding: 15px 40px; border-radius: 4px; display: inline-block;">${t('contact_btn')}</a>
+                    </section>
+
+                </div>
+                `;
+            }
+
+            function PageNews() {
+                return `
+                <div class="page-news container" style="padding-top: 150px;">
+                    <h1 class="fade-in serif" style="font-size: 2.5rem; margin-bottom: 60px; text-align: center;">${t('news_title')}</h1>
+                    <div class="news-list">
+                        <article class="news-item fade-in" style="border-bottom: 1px solid #eee; padding: 40px 0; display: flex; gap: 40px; align-items: flex-start;">
+                            <div style="flex: 0 0 150px; color: #999;">${t('news_1_date')}</div>
+                            <div>
+                                <h2 style="font-size: 1.2rem; margin-bottom: 10px;">${t('news_1_title')}</h2>
+                                <p style="color: #666; line-height: 1.8;">${t('news_1_desc')}</p>
+                            </div>
+                        </article>
+                        <article class="news-item fade-in" style="border-bottom: 1px solid #eee; padding: 40px 0; display: flex; gap: 40px; align-items: flex-start;">
+                            <div style="flex: 0 0 150px; color: #999;">${t('news_2_date')}</div>
+                            <div>
+                                <h2 style="font-size: 1.2rem; margin-bottom: 10px;">${t('news_2_title')}</h2>
+                                <p style="color: #666; line-height: 1.8;">${t('news_2_desc')}</p>
+                            </div>
+                        </article>
+                         <article class="news-item fade-in" style="border-bottom: 1px solid #eee; padding: 40px 0; display: flex; gap: 40px; align-items: flex-start;">
+                            <div style="flex: 0 0 150px; color: #999;">${t('news_3_date')}</div>
+                            <div>
+                                <h2 style="font-size: 1.2rem; margin-bottom: 10px;">${t('news_3_title')}</h2>
+                                <p style="color: #666; line-height: 1.8;">${t('news_3_desc')}</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>`;
+            }
+
+            function PageContact() {
+                return `
+                <div class="page-contact container" style="padding-top: 150px; max-width: 800px;">
+                    <h1 class="fade-in serif" style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">${t('contact_title')}</h1>
+                    <p class="fade-in text-center" style="margin-bottom: 60px;">${t('contact_desc')}</p>
+
+                    <form class="contact-form fade-in" style="background: #f9f9f9; padding: 60px; border-radius: 4px;">
+                        <div class="form-group" style="margin-bottom: 30px;">
+                            <label style="display: block; margin-bottom: 10px; font-weight: bold;">${t('form_name')}</label>
+                            <input type="text" style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 30px;">
+                            <label style="display: block; margin-bottom: 10px; font-weight: bold;">${t('form_email')}</label>
+                            <input type="email" style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                         <div class="form-group" style="margin-bottom: 30px;">
+                            <label style="display: block; margin-bottom: 10px; font-weight: bold;">${t('form_subject')}</label>
+                            <select style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
+                                <option>${t('form_subject_option_1')}</option>
+                                <option>${t('form_subject_option_2')}</option>
+                                <option>${t('form_subject_option_3')}</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 40px;">
+                            <label style="display: block; margin-bottom: 10px; font-weight: bold;">${t('form_message')}</label>
+                            <textarea rows="6" style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn-primary" style="background: var(--color-accent); color: #fff; padding: 15px 60px; border: none; border-radius: 4px; font-size: 1.1rem; cursor: pointer;">${t('btn_send')}</button>
+                        </div>
+                    </form>
+                </div>`;
+            }
+
+            // --- COMPONENTS ---
+            function renderHeader() {
+                const header = document.getElementById('main-header');
+                const lang = getLang();
+                header.innerHTML = `
+                <div class="header-inner container" style="display: flex; justify-content: space-between; align-items: center; height: 80px;">
+                <div class="logo"><a href="/" data-link style="font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 0.1em; font-weight: bold;">Well-Being Shonai</a></div>
+                <nav><ul style="display: flex; list-style: none; gap: 20px;">
+                    <li><a href="/about" data-link>${t('nav_about')}</a></li><li><a href="/experience" data-link>${t('nav_exp')}</a></li><li><a href="/news" data-link>${t('nav_news')}</a></li><li><a href="/contact" data-link>${t('nav_contact')}</a></li>
+                </ul></nav>
+                <div class="lang-switch" style="cursor: pointer; font-family: sans-serif; font-size: 0.9rem;">
+                    <span id="lang-jp" style="${lang === 'ja' ? 'font-weight:bold; text-decoration:underline;' : 'color:#999;'}">JP</span> / 
+                    <span id="lang-en" style="${lang === 'en' ? 'font-weight:bold; text-decoration:underline;' : 'color:#999;'}">EN</span>
+                </div></div>`;
+                Object.assign(header.style, { position: 'fixed', top: '0', width: '100%', zIndex: '100', backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', borderBottom: '1px solid rgba(0,0,0,0.05)' });
+                document.getElementById('lang-jp').addEventListener('click', () => { setLang('ja'); renderHeader(); refresh(); });
+                document.getElementById('lang-en').addEventListener('click', () => { setLang('en'); renderHeader(); refresh(); });
+            }
+
+            function renderFooter() {
+                const footer = document.getElementById('main-footer');
+                footer.innerHTML = `<div class="footer-inner container" style="padding: 40px 0; border-top: 1px solid #eee; margin-top: 60px; text-align:center;"><p>&copy; 2026 Well-Being Shonai</p></div>`;
+            }
+
+            // --- ROUTER ---
+            const routes = {
+                '/': PageHome, '/about': PageAbout, '/experience': PageExperience,
+                '/news': PageNews, '/contact': PageContact
+            };
+
+            let currentPath = '/'; // Simple logic for local file
+
+            // Mocking history API mostly for local view since pushState only works on server usually for full paths, 
+            // but for local file opening, we might use hash or just memory. 
+            // Let's use simple memory state or HASH for best results in file://
+            // To make it simple: We will use HASH routing for the bundled file: #/about
+
+            function refresh() {
+                const mainContent = document.getElementById('main-content');
+                // Parse hash
+                let hash = location.hash.replace('#', '') || '/';
+                const component = routes[hash] || routes['/'];
+                mainContent.innerHTML = component();
+                setTimeout(() => {
+                    initAnimations();
+                    window.scrollTo(0, 0);
+                    if (hash === '/' || hash === '') initHeroAnimation();
+                }, 0);
+            }
+
+            function initRouter() {
+                window.addEventListener('hashchange', refresh);
+                document.body.addEventListener('click', e => {
+                    if (e.target.matches('[data-link]')) {
+                        e.preventDefault();
+                        // Convert /about -> #/about
+                        const href = e.target.getAttribute('href');
+                        location.hash = href;
+                    }
+                });
+                refresh();
+            }
+
+            // --- INIT ---
+            renderHeader();
+            renderFooter();
+            initRouter();
+            initCursor();
+
+        })();
+        /* BUNDLED JAVASCRIPT END */
+    </script>
+</body>
+
+</html>
