@@ -116,3 +116,5 @@ function PageHome() {
     </div>
     `;
 }
+
+export const Home = PageHome;

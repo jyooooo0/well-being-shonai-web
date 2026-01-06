@@ -11,6 +11,14 @@ document.querySelector('#app').innerHTML = `
 `;
 
 // Initialize features
+import { dictionary, t, setLang } from './i18n.js';
+import { ASSETS } from './utils/assets_map.js';
+
+// Expose to global scope for pages
+window.t = t;
+window.ASSETS = ASSETS;
+window.dictionary = dictionary;
+
 renderHeader();
 renderFooter();
 initRouter();
